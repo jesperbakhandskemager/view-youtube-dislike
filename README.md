@@ -1,11 +1,13 @@
 # Show Youtube Dislikes
-Bring back Youtube Dislikes for Android (View Only)
+Bring back Youtube Dislikes for Android
 
 This is a simple application, that parses the data from the "returnyoutubedislike.com" API, and shows you their estimate dislike count on videos.
 
 When you open the app you are presented with a text box, where you can enter a youtube url and you will be presented with the given videos stats.
 
 You can also click the 'Share' button inside the official youtube app, and choose 'Show Youtube Dislikes' which will open the app on the information site for that video.
+
+If possible use the desktop browser extension, as you will be contributing to the project with your dislike data, and not just leeching it, helping everyone get more accurate results.
 
 I want to thank returnyoutubedislike.com for making an awesome tool, i just wanted to make it available for mobile as well.
 
