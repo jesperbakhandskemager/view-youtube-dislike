@@ -11,7 +11,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="417dp"
+        android:layout_marginTop="336dp"
         android:minHeight="48dp"
         android:onClick="ClickReturnYouTubeDislikeLink"
         android:text="Thanks to returnyoutubedislike.com"
@@ -48,15 +48,28 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/YTRatio"
+        android:layout_width="201dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="172dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="181dp"
+        android:text="Downloading Data"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.419"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/YTViews"
         android:layout_width="201dp"
         android:layout_height="59dp"
         android:layout_marginStart="172dp"
-        android:layout_marginTop="216dp"
+        android:layout_marginTop="272dp"
         android:layout_marginEnd="181dp"
         android:text="Downloading Data"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.435"
+        app:layout_constraintHorizontal_bias="0.419"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -65,7 +78,7 @@
         android:layout_width="300dp"
         android:layout_height="61dp"
         android:layout_marginStart="172dp"
-        android:layout_marginTop="296dp"
+        android:layout_marginTop="356dp"
         android:layout_marginEnd="181dp"
         android:text="Downloading Data"
         app:layout_constraintEnd_toEndOf="parent"
@@ -101,13 +114,27 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="156dp"
+        android:layout_marginEnd="48dp"
+        android:text="Ratio:"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toStartOf="@+id/YTLikes"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="27dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="124dp"
         android:layout_marginEnd="45dp"
-        android:text="Views"
+        android:text="Views:"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toStartOf="@+id/YTViews"
         app:layout_constraintHorizontal_bias="0.0"
@@ -119,7 +146,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="27dp"
-        android:layout_marginTop="148dp"
+        android:layout_marginTop="208dp"
         android:layout_marginEnd="45dp"
         android:text="Video Link:"
         android:textColor="@android:color/white"

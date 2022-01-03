@@ -121,24 +121,22 @@ public class DisplayMessageActivity extends AppCompatActivity {
         {
             return "";
         }
-        String Dislike_Count = "";
-        String view_count = "";
-        String like_count = "";
 
         String FINAL_URL = API_BASE_URL + API_QUERY_URL + result;
         final TextView textViewDislikes = (TextView) findViewById(R.id.YTDislikes);
         final TextView textViewLikes = (TextView) findViewById(R.id.YTLikes);
         final TextView textViewViews = (TextView) findViewById(R.id.YTViews);
         final TextView textViewVideoLink = (TextView) findViewById(R.id.YTVideoLink);
+        final TextView textViewRatio = (TextView) findViewById(R.id.YTRatio);
 
-        String myUrl = FINAL_URL;
-        StringRequest myRequest = new StringRequest(Request.Method.GET, myUrl,
+        StringRequest myRequest = new StringRequest(Request.Method.GET, FINAL_URL,
                 response -> {
                     try{
                         //Create a JSON object containing information from the API.
                         JSONObject myJsonObject = new JSONObject(response);
                         textViewDislikes.setText(myJsonObject.getString("dislikes") + " \uD83D\uDC4E");
                         textViewLikes.setText(myJsonObject.getString("likes") + " \uD83D\uDC4D");
+                        textViewRatio.setText(myJsonObject.getString("rating").substring(0, 3) + " / 5 ⭐");
                         textViewViews.setText(myJsonObject.getString("viewCount") + " \uD83D\uDC41️");
                         textViewVideoLink.setText(YouTubeLink + " \uD83D\uDD17");
                     } catch (JSONException e) {
