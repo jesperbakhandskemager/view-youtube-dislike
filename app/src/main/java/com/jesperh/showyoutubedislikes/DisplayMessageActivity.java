@@ -18,6 +18,8 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.DecimalFormat;
 import java.util.regex.Pattern;
 
 public class DisplayMessageActivity extends AppCompatActivity {
@@ -134,10 +136,10 @@ public class DisplayMessageActivity extends AppCompatActivity {
                     try{
                         //Create a JSON object containing information from the API.
                         JSONObject myJsonObject = new JSONObject(response);
-                        textViewDislikes.setText(myJsonObject.getString("dislikes") + " \uD83D\uDC4E");
-                        textViewLikes.setText(myJsonObject.getString("likes") + " \uD83D\uDC4D");
+                        textViewDislikes.setText(AddComma(myJsonObject.getString("dislikes")) + " \uD83D\uDC4E");
+                        textViewLikes.setText(AddComma(myJsonObject.getString("likes")) + " \uD83D\uDC4D");
                         textViewRatio.setText(myJsonObject.getString("rating").substring(0, 3) + " / 5 ⭐");
-                        textViewViews.setText(myJsonObject.getString("viewCount") + " \uD83D\uDC41️");
+                        textViewViews.setText(AddComma(myJsonObject.getString("viewCount")) + " \uD83D\uDC41️");
                         textViewVideoLink.setText(YouTubeLink + " \uD83D\uDD17");
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -149,6 +151,14 @@ public class DisplayMessageActivity extends AppCompatActivity {
         requestQueue.add(myRequest);
 
         return "";
+    }
+
+    public String AddComma(String number)
+    {
+        double parsedNumber = Double.parseDouble(number);
+        DecimalFormat formatter = new DecimalFormat("#,###");
+        number = formatter.format(parsedNumber);
+        return number;
     }
 
     public void ClickReturnYouTubeDislikeLink(View view)
