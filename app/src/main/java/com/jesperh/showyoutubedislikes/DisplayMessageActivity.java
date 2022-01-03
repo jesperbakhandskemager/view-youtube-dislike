@@ -13,26 +13,15 @@ import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
-import java.util.List;
-import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class DisplayMessageActivity extends AppCompatActivity {
 
-    // Simpler Regex: ^(https?\:\/\/)?((www\.)?youtube\.com|youtu\.be)\/.+$
-    //  ^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$
     Pattern YoutubeRegex = Pattern.compile("^(https?\\:\\/\\/)?((www\\.)?youtube\\.com|youtu\\.be)\\/.+$", Pattern.CASE_INSENSITIVE);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,18 +100,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-    // Capture the layout's TextView and set the string as its text
 
     public static String API_BASE_URL = "https://returnyoutubedislikeapi.com/";
     public static String API_QUERY_URL = "votes?videoId=";
-
-    //kxOuG8jMIgI
-    // Youtube Example:
-    // https://www.youtube.com/watch?v=Nz9b0oJw69I
-    //youtu.be Example:
-    // https://youtu.be/Nz9b0oJw69I
-    // API: Example
-    // https://returnyoutubedislikeapi.com/votes?videoId=kxOuG8jMIgI
 
 
     public String GetDataAPI(String YouTubeLink)
@@ -144,7 +124,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         String Dislike_Count = "";
         String view_count = "";
         String like_count = "";
-        //TextView textView = findViewById(R.id.YTDislikes);
+
         String FINAL_URL = API_BASE_URL + API_QUERY_URL + result;
         final TextView textViewDislikes = (TextView) findViewById(R.id.YTDislikes);
         final TextView textViewLikes = (TextView) findViewById(R.id.YTLikes);
@@ -169,10 +149,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
         );
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(myRequest);
-        //textView.setText("f");
-
-        //TextView textView = findViewById(R.id.YTViews);
-        //textView.setText(FINAL_URL);
 
         return "";
     }
