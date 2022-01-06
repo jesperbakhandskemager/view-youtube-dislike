@@ -9,8 +9,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
@@ -71,10 +69,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
         // the Dialog Box then it will remain show
         builder.setCancelable(false);
 
-        // Set the positive button with yes name
-        // OnClickListener method is use of
-        // DialogInterface interface.
-
         AlertDialog.Builder Yes = builder
                 .setPositiveButton(
                         "Okay",
@@ -85,15 +79,11 @@ public class DisplayMessageActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog,
                                                 int which) {
 
-                                // When the user click yes button
-                                // then app will close
+                                // When the user click Okay button
+                                // then app returns to the front page
                                 finish();
                             }
                         });
-
-        // Set the Negative button with No name
-        // OnClickListener method is use
-        // of DialogInterface interface
 
         // Create the Alert dialog
         AlertDialog alertDialog = builder.create();
@@ -104,27 +94,29 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
 
     public static String API_BASE_URL = "https://returnyoutubedislikeapi.com/";
-    public static String API_QUERY_URL = "votes?videoId=";
+    public static String API_GET_VOTES_QUERY = "votes?videoId=";
 
 
     public String GetDataAPI(String YouTubeLink)
     {
-        String result = "";
+        String VIDEO_ID = "";
         if (YouTubeLink.contains("https://youtu.be"))
         {
-            result = YouTubeLink.substring(17, 28);
+            VIDEO_ID = YouTubeLink.substring(17, 28);
         }
         else if (YouTubeLink.contains("youtube.com"))
         {
             String[] arrOfStr = YouTubeLink.split("=", 2);
-            result = arrOfStr[1];
+            VIDEO_ID = arrOfStr[1];
         }
         else
         {
             return "";
         }
 
-        String FINAL_URL = API_BASE_URL + API_QUERY_URL + result;
+        String FINAL_URL = API_BASE_URL + API_GET_VOTES_QUERY + VIDEO_ID;
+
+        // Define the text boxes
         final TextView textViewDislikes = (TextView) findViewById(R.id.YTDislikes);
         final TextView textViewLikes = (TextView) findViewById(R.id.YTLikes);
         final TextView textViewViews = (TextView) findViewById(R.id.YTViews);
@@ -145,12 +137,29 @@ public class DisplayMessageActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 },
-                volleyError -> Toast.makeText(DisplayMessageActivity.this, volleyError.getMessage(), Toast.LENGTH_SHORT).show()
+                volleyError -> ErrorDownloading()
+                // Toast.makeText(DisplayMessageActivity.this, volleyError.getMessage(), Toast.LENGTH_SHORT).show()
         );
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(myRequest);
 
         return "";
+    }
+
+    public void ErrorDownloading()
+    {
+        final TextView textViewDislikes = (TextView) findViewById(R.id.YTDislikes);
+        final TextView textViewLikes = (TextView) findViewById(R.id.YTLikes);
+        final TextView textViewViews = (TextView) findViewById(R.id.YTViews);
+        final TextView textViewVideoLink = (TextView) findViewById(R.id.YTVideoLink);
+        final TextView textViewRatio = (TextView) findViewById(R.id.YTRatio);
+
+        textViewDislikes.setText("Error Downloading!");
+        textViewLikes.setText("Error Downloading!");
+        textViewRatio.setText("Error Downloading!");
+        textViewViews.setText("Error Downloading!");
+        textViewVideoLink.setText("Error Downloading!");
+
     }
 
     public String AddComma(String number)
