@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
 
 public class DisplayMessageActivity extends AppCompatActivity {
 
-    Pattern YoutubeRegex = Pattern.compile("^(https?\\:\\/\\/)?((www\\.)?youtube\\.com|youtu\\.be)\\/.+$", Pattern.CASE_INSENSITIVE);
+    Pattern YoutubeRegex = Pattern.compile("^(https?\\:\\/\\/)?((www\\.)?((m\\.))?youtube\\.com|youtu\\.be)\\/.+$", Pattern.CASE_INSENSITIVE);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
