@@ -1,4 +1,11 @@
 # Show Youtube Dislikes
+
+## Installation
+[F-Droid](https://f-droid.org/en/packages/com.jesperh.showyoutubedislikes/)
+
+[APK](https://github.com/jesperbakhandskemager/view-youtube-dislike/releases/latest)
+
+## Description
 Bring back Youtube Dislikes for Android
 
 This is a simple application, that parses the data from the "returnyoutubedislike.com" API, and shows you their estimate dislike count on videos.
