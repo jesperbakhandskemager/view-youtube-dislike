@@ -160,4 +160,30 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/videoTitle"
+        android:layout_width="294dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="78dp"
+        android:text="Title"
+        android:textColor="@android:color/primary_text_dark"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/YTVideoLink" />
+
+    <ImageView
+        android:id="@+id/thumbnail_View"
+        android:layout_width="411dp"
+        android:layout_height="166dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/videoTitle"
+        app:srcCompat="@mipmap/rydblogo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

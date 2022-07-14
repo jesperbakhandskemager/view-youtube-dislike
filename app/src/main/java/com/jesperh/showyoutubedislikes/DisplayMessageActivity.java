@@ -1,23 +1,38 @@
 package com.jesperh.showyoutubedislikes;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.DecimalFormat;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Pattern;
 
 public class DisplayMessageActivity extends AppCompatActivity {
@@ -115,6 +130,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         }
 
         String FINAL_URL = API_BASE_URL + API_GET_VOTES_QUERY + VIDEO_ID;
+        String oEmbedURL = "https://youtube.com/oembed?format=json&url=" + YouTubeLink;
 
         // Define the text boxes
         final TextView textViewDislikes = (TextView) findViewById(R.id.YTDislikes);
@@ -122,6 +138,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
         final TextView textViewViews = (TextView) findViewById(R.id.YTViews);
         final TextView textViewVideoLink = (TextView) findViewById(R.id.YTVideoLink);
         final TextView textViewRatio = (TextView) findViewById(R.id.YTRatio);
+
+        final TextView videoTitle = (TextView) findViewById(R.id.videoTitle);
+        final ImageView ThumbnailView = (ImageView)findViewById(R.id.thumbnail_View);
 
         StringRequest myRequest = new StringRequest(Request.Method.GET, FINAL_URL,
                 response -> {
@@ -140,25 +159,48 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 volleyError -> ErrorDownloading()
                 // Toast.makeText(DisplayMessageActivity.this, volleyError.getMessage(), Toast.LENGTH_SHORT).show()
         );
+
+        StringRequest oEmbedRequest = new StringRequest(Request.Method.GET, oEmbedURL,
+                response -> {
+                    try{
+                        //Create a JSON object containing information from the API.
+                        JSONObject myJsonObject = new JSONObject(response);
+                        // Set video title
+                        videoTitle.setText(myJsonObject.getString("title"));
+
+                        // Set video thumbnail
+                        String thumbnailUrl = myJsonObject.getString("thumbnail_url");
+                        Picasso.get().load(thumbnailUrl).into(ThumbnailView);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+                volleyError -> ErrorDownloading()
+                // Toast.makeText(DisplayMessageActivity.this, volleyError.getMessage(), Toast.LENGTH_SHORT).show()
+        );
+
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(myRequest);
+        requestQueue.add(oEmbedRequest);
 
         return "";
     }
 
     public void ErrorDownloading()
     {
-        final TextView textViewDislikes = (TextView) findViewById(R.id.YTDislikes);
-        final TextView textViewLikes = (TextView) findViewById(R.id.YTLikes);
-        final TextView textViewViews = (TextView) findViewById(R.id.YTViews);
-        final TextView textViewVideoLink = (TextView) findViewById(R.id.YTVideoLink);
-        final TextView textViewRatio = (TextView) findViewById(R.id.YTRatio);
+        final TextView textViewDislikes = findViewById(R.id.YTDislikes);
+        final TextView textViewLikes = findViewById(R.id.YTLikes);
+        final TextView textViewViews = findViewById(R.id.YTViews);
+        final TextView textViewVideoLink = findViewById(R.id.YTVideoLink);
+        final TextView textViewRatio = findViewById(R.id.YTRatio);
+        final TextView videoTitle = findViewById(R.id.videoTitle);
 
         textViewDislikes.setText("Error Downloading!");
         textViewLikes.setText("Error Downloading!");
         textViewRatio.setText("Error Downloading!");
         textViewViews.setText("Error Downloading!");
         textViewVideoLink.setText("Error Downloading!");
+        textViewVideoLink.setText("Unknown Title");
 
     }
 
